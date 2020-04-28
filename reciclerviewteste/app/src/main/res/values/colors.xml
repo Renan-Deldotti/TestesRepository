@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    
+    // Colors from config ---------------
+    <color name="ultramarine_blue">#2962ff</color>
+    <color name="flicker_pink">#F72585</color>
+    <color name="purple">#7209B7</color>
+    <color name="trypan_blue">#3A0CA3</color>
+    <color name="vivid_sky_blue">#4CC9F0</color>
+</resources>

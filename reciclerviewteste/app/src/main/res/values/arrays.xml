@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="color_label">
+        <item>@string/color_blue_label</item>
+        <item>@string/color_pink_label</item>
+    </array>
+    <array name="color_values">
+        <item>@string/color_blue_value</item>
+        <item>@string/color_pink_value</item>
+    </array>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:key="@string/notifications_key"
+        android:title="@string/notifications_title"
+        android:defaultValue="@bool/notifications_default_value"/>
+
+    <Preference
+        android:key="@string/feedback_key"
+        android:title="@string/feedback_title"
+        android:summary="@string/feedback_summary"/>
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/sendmail_key"
+        android:title="@string/sendmail_title" />
+
+    <ListPreference
+        android:defaultValue="@string/color_blue_value"
+        app:useSimpleSummaryProvider="true"
+        android:entries="@array/color_label"
+        android:entryValues="@array/color_values"
+        android:key="@string/color_key"
+        android:title="@string/color_label"/>
+
+    <EditTextPreference
+        android:defaultValue="@string/size_default"
+        android:summary="@string/size_summary"
+        android:key="@string/size_key"
+        android:title="@string/size_title"/>
+
+</PreferenceScreen>
