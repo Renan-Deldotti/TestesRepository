@@ -12,6 +12,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -110,6 +111,14 @@ public class MainActivity extends AppCompatActivity {
         String sInt = preferences.getString(getResources().getString(R.string.size_key),getResources().getString(R.string.size_default)).trim();
         String defaultInt = getResources().getString(R.string.val_12345).trim();
         placeHolder2.setText(String.valueOf((Integer.parseInt(defaultInt)*Integer.parseInt(sInt))));
+        TextView orientationTv = findViewById(R.id.orientationTv);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            orientationTv.setText("Landscape");
+        }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            orientationTv.setText("Portrait");
+        }else{
+            orientationTv.setText("Unknown");
+        }
     }
 
     @Override
