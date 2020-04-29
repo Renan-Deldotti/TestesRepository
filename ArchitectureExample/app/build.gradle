@@ -44,8 +44,10 @@ dependencies {
     // Room dependecies -----------------
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    //implementation "androidx.room:room-rxjava2:$room_version"
 
     // Material and CardView ---------------
     implementation 'com.google.android.material:material:1.2.0-alpha06'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }
