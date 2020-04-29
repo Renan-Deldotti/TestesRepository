@@ -40,7 +40,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     //implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
     // Room dependecies -----------------
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Material and CardView ---------------
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
