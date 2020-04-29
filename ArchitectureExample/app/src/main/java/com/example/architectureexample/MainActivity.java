@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Youtube answer: Working
         noteViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()).create(NoteViewModel.class);
-        // Stackoverflow answer: Working
-        //noteViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(NoteViewModel.class);
-        // Google Codelab answer: Not working
-        //noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
