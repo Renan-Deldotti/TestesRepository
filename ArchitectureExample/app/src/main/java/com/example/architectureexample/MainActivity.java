@@ -18,14 +18,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Youtube answers
+        // Youtube answer: Working
         noteViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication()).create(NoteViewModel.class);
-//        noteViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(NoteViewModel.class);
-//
-//        Stackoverflow answer:
+        // Stackoverflow answer: Working
         //noteViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(NoteViewModel.class);
-
-        // Google Codelab answer:
+        // Google Codelab answer: Not working
         //noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
