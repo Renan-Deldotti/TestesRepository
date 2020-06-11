@@ -1,7 +1,9 @@
 package com.example.foregroundserviceexample;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(this,ExampleService.class);
         serviceIntent.putExtra("inputExtra",input);
 
-        startService(serviceIntent);
+        ContextCompat.startForegroundService(this,serviceIntent);
     }
     public void stopService(View v){
         Intent serviceIntent = new Intent(this,ExampleService.class);
