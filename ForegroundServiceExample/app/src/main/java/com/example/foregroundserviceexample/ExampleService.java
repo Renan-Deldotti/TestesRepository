@@ -20,8 +20,8 @@ public class ExampleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String input = intent.getStringExtra("inputExtra");
 
-        Intent notificationIntent = new Intent(this,MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_ID)
                 .setContentTitle("Example Service")
@@ -30,7 +30,7 @@ public class ExampleService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
 
-        startForeground(1,notification);
+        startForeground(1, notification);
 
 
         // Works on ui thread
