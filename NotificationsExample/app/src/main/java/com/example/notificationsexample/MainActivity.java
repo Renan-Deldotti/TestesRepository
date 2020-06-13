@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private NotificationManagerCompat notificationManagerCompat;
     private EditText editTextTitle, editTextMessage;
+
+    private MediaSessionCompat mediaSessionCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         editTextMessage = findViewById(R.id.edit_text_message);
         editTextTitle = findViewById(R.id.edit_text_title);
+
+        mediaSessionCompat = new MediaSessionCompat(this,"tag");
     }
 
     public void sendOnChannel1(View v) {
@@ -82,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 .addAction(R.drawable.ic_baseline_navigate_next_24, "Pause", null)
                 .addAction(R.drawable.ic_thumb_up, "Like", null)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
-                        .setShowActionsInCompactView(1, 2, 3))
+                        .setShowActionsInCompactView(1, 2, 3)
+                .setMediaSession(mediaSessionCompat.getSessionToken()))
                 .setSubText("Sub text")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
