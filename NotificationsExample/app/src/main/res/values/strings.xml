@@ -5,4 +5,5 @@
     <string name="message">Message</string>
     <string name="title">Title</string>
     <string name="fake_string">Fake String</string>
+    <string name="send_on_channel_3">Send on channel 3</string>
 </resources>
