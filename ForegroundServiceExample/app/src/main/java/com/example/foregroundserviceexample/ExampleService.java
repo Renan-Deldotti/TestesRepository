@@ -24,14 +24,15 @@ public class ExampleService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_alarm)
                 .setContentTitle("Example Service")
                 .setContentText(input)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
 
         startForeground(1, notification);
-
 
         // Works on ui thread
         return START_NOT_STICKY;

@@ -3,11 +3,9 @@ package com.example.foregroundserviceexample;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -33,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void stopService(View v){
         Intent serviceIntent = new Intent(this,ExampleService.class);
+        Intent musicServiceIntent = new Intent(this,TestMusicService.class);
         stopService(serviceIntent);
+        stopService(musicServiceIntent);
+    }
+
+    public void startMediaService(View v) {
+        Intent musicServiceIntent = new Intent(this,TestMusicService.class);
+        ContextCompat.startForegroundService(this,musicServiceIntent);
     }
 }
