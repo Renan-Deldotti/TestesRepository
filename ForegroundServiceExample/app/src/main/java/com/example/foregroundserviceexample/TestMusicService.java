@@ -7,20 +7,38 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 public class TestMusicService extends Service {
 
     private static final String TAG = TestMusicService.class.getSimpleName();
     private MediaSessionCompat mediaSessionCompat;
+    private ViewModel viewModel;
+    private String fromViewModel = "";
+    private Thread runBackground = null;
+    private Observer<String> stringObserver = null;
+    private boolean shouldStopRunBackground = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mediaSessionCompat = new MediaSessionCompat(this, TAG);
+        viewModel = new ViewModel();
+        stringObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                fromViewModel = s;
+            }
+        };
     }
 
     @Override
@@ -47,6 +65,24 @@ public class TestMusicService extends Service {
 
         startForeground(1, notification);
 
+
+        viewModel.getStringLiveData().observeForever(stringObserver);
+
+        runBackground = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    if (shouldStopRunBackground){
+                        return;
+                    }
+                    SystemClock.sleep(1000);
+                    Log.e(TAG, fromViewModel+" "+i+" running...");
+                }
+            }
+        });
+
+        runBackground.start();
+
         // Works on ui thread
         return START_NOT_STICKY;
     }
@@ -55,6 +91,12 @@ public class TestMusicService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (viewModel.getStringLiveData().hasObservers()){
+            viewModel.getStringLiveData().removeObserver(stringObserver);
+            Log.e(TAG, "Observer removed.");
+        }
+        shouldStopRunBackground = true;
+        Log.e(TAG, "Stopping threads...");
     }
 
     @Nullable
