@@ -11,4 +11,8 @@ public class ViewModel extends androidx.lifecycle.ViewModel {
         stringLiveData.postValue(TEST);
         return stringLiveData;
     }
+
+    public void setStringLiveData(String s) {
+        this.stringLiveData.postValue(s);
+    }
 }

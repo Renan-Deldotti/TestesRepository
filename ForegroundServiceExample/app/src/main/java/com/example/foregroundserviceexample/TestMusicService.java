@@ -3,7 +3,10 @@ package com.example.foregroundserviceexample;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
@@ -20,13 +23,23 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 public class TestMusicService extends Service {
 
+    public static final String CHANGE_STRING = "com.example.foregroundserviceexample.CHANGE_STRING";
+    public static final String STRING_EXTRA = "com.example.foregroundserviceexample.VALUE";
     private static final String TAG = TestMusicService.class.getSimpleName();
     private MediaSessionCompat mediaSessionCompat;
     private ViewModel viewModel;
     private String fromViewModel = "";
+    private String fromReceiver = "";
     private Thread runBackground = null;
     private Observer<String> stringObserver = null;
     private boolean shouldStopRunBackground = false;
+
+    private BroadcastReceiver changeStringReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            fromReceiver = intent.getStringExtra(STRING_EXTRA);
+        }
+    };
 
     @Override
     public void onCreate() {
@@ -39,6 +52,9 @@ public class TestMusicService extends Service {
                 fromViewModel = s;
             }
         };
+
+        IntentFilter intentFilter = new IntentFilter(CHANGE_STRING);
+        registerReceiver(changeStringReceiver,intentFilter);
     }
 
     @Override
@@ -73,10 +89,11 @@ public class TestMusicService extends Service {
             public void run() {
                 for (int i = 0; i < 10; i++) {
                     if (shouldStopRunBackground){
+                        Log.e(TAG, "Stopping thread...");
                         return;
                     }
                     SystemClock.sleep(1000);
-                    Log.e(TAG, fromViewModel+" "+i+" running...");
+                    Log.e(TAG, fromViewModel+" "+fromReceiver+" "+i+" running...");
                 }
             }
         });
@@ -96,7 +113,7 @@ public class TestMusicService extends Service {
             Log.e(TAG, "Observer removed.");
         }
         shouldStopRunBackground = true;
-        Log.e(TAG, "Stopping threads...");
+        unregisterReceiver(changeStringReceiver);
     }
 
     @Nullable
